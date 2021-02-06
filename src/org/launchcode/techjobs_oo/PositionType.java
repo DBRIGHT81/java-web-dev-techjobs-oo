@@ -35,7 +35,7 @@ public class PositionType {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PositionType that = (PositionType) o;
-        return id == that.id && value.equals(that.value);
+        return id == that.id ;
     }
 
     @Override
