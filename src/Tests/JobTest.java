@@ -43,4 +43,50 @@ public class JobTest {
     public void testJobsForEquality (){
         assertNotEquals(job1, job2);
     }
+
+    @Test
+    public void testForToString() {
+        String jobAsString = job1.toString();
+        assertTrue(jobAsString.startsWith("\n"));
+        assertTrue(jobAsString.endsWith("\n"));
+    }
+
+    @Test
+    public void testForLabel() {
+        String expectedJobString = "\n" +
+                "ID: " + job1.getId() +"\n" +
+                "Name: Astronaut\n" +
+                "Employer: NASA\n" +
+                "Location: Florida\n" +
+                "Position Type: Lead\n" +
+                "Core Competency: Timeliness\n" ;
+
+        job1.setName("Astronaut");
+        job1.setEmployer(new Employer("NASA"));
+        job1.setLocation(new Location("Florida"));
+        job1.setPositionType(new PositionType("Lead"));
+        job1.setCoreCompetency(new CoreCompetency("Timeliness"));
+        assertEquals(expectedJobString, job1.toString());
+    }
+
+    @Test
+    public void  testForEmptyFields() {
+       String newExpectedJobString = "\n" +
+                "ID: " + job1.getId() + "\n" +
+                "Name: Front Office\n" +
+                "Employer: Data not available\n" +
+                "Location: Data not available\n" +
+                "Position Type: Data not available\n" +
+                "Core Competency: Data not available\n" ;
+
+
+        job1.setName("Front Office");
+        assertEquals(newExpectedJobString, job1.toString());
+
+    }
+
+    @Test
+    public void testForAllEmptyFields(){
+        assertEquals("\nOOPS! This job does not seem to exist.\n", job1.toString());
+    }
 }
